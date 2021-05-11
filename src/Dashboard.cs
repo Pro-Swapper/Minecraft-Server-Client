@@ -20,9 +20,9 @@ namespace MinecraftServerClient
             if (Config.CurrentConfig.BotToken != "NONE")
             {
                 discordcheckbox.Checked = true;
-                BotTokenlabel.Visible = true;
-                bottoken.Visible = true;
                 bottoken.Text = Config.CurrentConfig.BotToken;
+                logchannel.Text = Config.CurrentConfig.LogChannel;
+                chatchannel.Text = Config.CurrentConfig.ChatChannel;
             }
         }
         private void Form1_MouseDown(object sender, MouseEventArgs e)
@@ -86,6 +86,11 @@ namespace MinecraftServerClient
             {
                 BotTokenlabel.Visible = true;
                 bottoken.Visible = true;
+                loglabel.Visible = true;
+                logchannel.Visible = true;
+
+                chatchannel.Visible = true;
+                chatchannellabel.Visible = true;
             }
             else
             {
@@ -94,12 +99,32 @@ namespace MinecraftServerClient
                 BotTokenlabel.Visible = false;
                 bottoken.Text = "";
                 bottoken.Visible = false;
+
+                loglabel.Visible = false;
+                logchannel.Visible = false;
+                logchannel.Text = "";
+
+                chatchannel.Visible = false;
+                chatchannellabel.Visible = false;
+                chatchannel.Text = "";
             }   
         }
 
         private void bottoken_TextChanged(object sender, EventArgs e)
         {
             Config.CurrentConfig.BotToken = bottoken.Text;
+            Config.SaveConfig();
+        }
+
+        private void logchannel_TextChanged(object sender, EventArgs e)
+        {
+            Config.CurrentConfig.LogChannel = logchannel.Text;
+            Config.SaveConfig();
+        }
+
+        private void chatchannel_TextChanged(object sender, EventArgs e)
+        {
+            Config.CurrentConfig.ChatChannel = chatchannel.Text;
             Config.SaveConfig();
         }
     }

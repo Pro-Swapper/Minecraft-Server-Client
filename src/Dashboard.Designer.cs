@@ -38,7 +38,11 @@ namespace MinecraftServerClient
             this.discordcheckbox = new System.Windows.Forms.CheckBox();
             this.bottoken = new System.Windows.Forms.TextBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.loglabel = new System.Windows.Forms.Label();
+            this.logchannel = new System.Windows.Forms.TextBox();
             this.BotTokenlabel = new System.Windows.Forms.Label();
+            this.chatchannellabel = new System.Windows.Forms.Label();
+            this.chatchannel = new System.Windows.Forms.TextBox();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -123,7 +127,7 @@ namespace MinecraftServerClient
             // 
             this.bottoken.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.bottoken.Font = new System.Drawing.Font("Consolas", 9F);
-            this.bottoken.Location = new System.Drawing.Point(73, 44);
+            this.bottoken.Location = new System.Drawing.Point(98, 44);
             this.bottoken.Multiline = true;
             this.bottoken.Name = "bottoken";
             this.bottoken.Size = new System.Drawing.Size(239, 60);
@@ -133,6 +137,10 @@ namespace MinecraftServerClient
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.chatchannellabel);
+            this.groupBox1.Controls.Add(this.chatchannel);
+            this.groupBox1.Controls.Add(this.loglabel);
+            this.groupBox1.Controls.Add(this.logchannel);
             this.groupBox1.Controls.Add(this.BotTokenlabel);
             this.groupBox1.Controls.Add(this.discordcheckbox);
             this.groupBox1.Controls.Add(this.bottoken);
@@ -144,6 +152,28 @@ namespace MinecraftServerClient
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Discord Bot Integration";
             // 
+            // loglabel
+            // 
+            this.loglabel.AutoSize = true;
+            this.loglabel.ForeColor = System.Drawing.Color.White;
+            this.loglabel.Location = new System.Drawing.Point(3, 110);
+            this.loglabel.Name = "loglabel";
+            this.loglabel.Size = new System.Drawing.Size(89, 13);
+            this.loglabel.TabIndex = 16;
+            this.loglabel.Text = "Log Channel ID:";
+            this.loglabel.Visible = false;
+            // 
+            // logchannel
+            // 
+            this.logchannel.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.logchannel.Font = new System.Drawing.Font("Consolas", 9F);
+            this.logchannel.Location = new System.Drawing.Point(98, 110);
+            this.logchannel.Name = "logchannel";
+            this.logchannel.Size = new System.Drawing.Size(239, 15);
+            this.logchannel.TabIndex = 15;
+            this.logchannel.Visible = false;
+            this.logchannel.TextChanged += new System.EventHandler(this.logchannel_TextChanged);
+            // 
             // BotTokenlabel
             // 
             this.BotTokenlabel.AutoSize = true;
@@ -154,6 +184,28 @@ namespace MinecraftServerClient
             this.BotTokenlabel.TabIndex = 14;
             this.BotTokenlabel.Text = "Bot Token:";
             this.BotTokenlabel.Visible = false;
+            // 
+            // chatchannellabel
+            // 
+            this.chatchannellabel.AutoSize = true;
+            this.chatchannellabel.ForeColor = System.Drawing.Color.White;
+            this.chatchannellabel.Location = new System.Drawing.Point(3, 131);
+            this.chatchannellabel.Name = "chatchannellabel";
+            this.chatchannellabel.Size = new System.Drawing.Size(94, 13);
+            this.chatchannellabel.TabIndex = 18;
+            this.chatchannellabel.Text = "Chat Channel ID:";
+            this.chatchannellabel.Visible = false;
+            // 
+            // chatchannel
+            // 
+            this.chatchannel.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.chatchannel.Font = new System.Drawing.Font("Consolas", 9F);
+            this.chatchannel.Location = new System.Drawing.Point(98, 131);
+            this.chatchannel.Name = "chatchannel";
+            this.chatchannel.Size = new System.Drawing.Size(239, 15);
+            this.chatchannel.TabIndex = 17;
+            this.chatchannel.Visible = false;
+            this.chatchannel.TextChanged += new System.EventHandler(this.chatchannel_TextChanged);
             // 
             // Dashboard
             // 
@@ -195,6 +247,10 @@ namespace MinecraftServerClient
         private System.Windows.Forms.TextBox bottoken;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Label BotTokenlabel;
+        private System.Windows.Forms.Label loglabel;
+        private System.Windows.Forms.TextBox logchannel;
+        private System.Windows.Forms.Label chatchannellabel;
+        private System.Windows.Forms.TextBox chatchannel;
     }
 }
 

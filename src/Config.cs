@@ -41,7 +41,8 @@ namespace MinecraftServerClient
         {
             public string launchargs { get; set; } = "-Xmx1024M -Xms1024M -jar server.jar --nogui";
             public string BotToken { get; set; } = "NONE";
-            public ulong LastChannel { get; set; }
+            public string LogChannel { get; set; }
+            public string ChatChannel { get; set; }
         }
 
     }

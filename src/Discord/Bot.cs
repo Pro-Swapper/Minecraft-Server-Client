@@ -27,7 +27,7 @@ namespace MinecraftServerClient.DiscordBot
             _client = new DiscordSocketClient();
 
             //_client.Log += Log;
-            _client.MessageUpdated += MessageUpdated;
+            //_client.MessageUpdated += MessageUpdated;
             _client.MessageReceived += MessageReceived;
             await _client.LoginAsync(TokenType.Bot, Config.CurrentConfig.BotToken);
             await _client.StartAsync();
@@ -36,14 +36,11 @@ namespace MinecraftServerClient.DiscordBot
 
         public static async Task SendMsgAsync(string msg)
         {
-            if (msg.Contains("Rcon connection from: /127.0.0.1"))
-                return;
-
             try
             {
-                if (Config.CurrentConfig.LastChannel.ToString().Length > 1)
+                if (Config.CurrentConfig.LogChannel.ToString().Length > 1)
                 {
-                    var chnl = _client.GetChannel(Config.CurrentConfig.LastChannel) as IMessageChannel; // 4
+                    ITextChannel chnl = _client.GetChannel(ulong.Parse(Config.CurrentConfig.LogChannel)) as ITextChannel; // 4
                     await chnl.SendMessageAsync("`" + msg + "`"); // 5
                 }
             }
@@ -51,52 +48,81 @@ namespace MinecraftServerClient.DiscordBot
             {
 
             }
-            
-
         }
-
+        public static async Task SendChat(string username, string msg)
+        {
+            try
+            {
+                if (Config.CurrentConfig.ChatChannel.ToString().Length > 1)
+                {
+                    
+                    ITextChannel chnl = _client.GetChannel(ulong.Parse(Config.CurrentConfig.ChatChannel)) as ITextChannel;
+                    var builder = new EmbedBuilder();
+                    builder.WithDescription(msg);
+                    builder.WithColor(new Color(0xC5AB7));
+                    builder.WithAuthor(author => {
+                        author
+                            .WithName(username);
+                    });
+                    builder.WithThumbnailUrl($"https://crafthead.net/avatar/{username}");
+                    var embed = builder.Build();
+                     await chnl.SendMessageAsync("", false, builder.Build());
+                }
+            }
+            catch
+            {
+            }
+        }
+        /*
         private Task MessageUpdated(Cacheable<IMessage, ulong> before, SocketMessage after, ISocketMessageChannel channel)
         {
             Console.WriteLine(after.ToString());
             return Task.CompletedTask;
         }
-
+        */
         private async Task MessageReceived(SocketMessage message)
         {
             if (message.Author.IsBot)
                 return;
-            string response = message.Content;
-            Config.CurrentConfig.LastChannel = message.Channel.Id;
-            Config.SaveConfig();
-            if (response == "!!status")
+
+            if (message.Channel.Id == ulong.Parse(Config.CurrentConfig.LogChannel))
             {
-
-                MineStatLib.MineStat minestat = new MineStatLib.MineStat("127.0.0.1", (ushort)global.GetPort(global.PortTypes.Server), 500);
-
-                if (minestat.ServerUp)
+                string response = message.Content;
+                if (response == "!!status")
                 {
-                    EmbedBuilder builder = new EmbedBuilder();
 
-                    builder.WithTitle($"Server Status for {minestat.Motd}");
-                    builder.AddField("Players:", $"{minestat.CurrentPlayers}/{minestat.MaximumPlayers}", true);
-                    builder.AddField("Version: ", minestat.Version, true);
-                    builder.AddField("RAM: ", CurrentServerRAM(), true);
-                    builder.WithColor(Color.Red);
-                    await message.Channel.SendMessageAsync("", false, builder.Build());
+                    MineStatLib.MineStat minestat = new MineStatLib.MineStat("127.0.0.1", (ushort)global.GetPort(global.PortTypes.Server), 500);
+
+                    if (minestat.ServerUp)
+                    {
+                        EmbedBuilder builder = new EmbedBuilder();
+
+                        builder.WithTitle($"Server Status for {minestat.Motd}");
+                        builder.AddField("Players:", $"{minestat.CurrentPlayers}/{minestat.MaximumPlayers}", true);
+                        builder.AddField("Version: ", minestat.Version, true);
+                        builder.AddField("RAM: ", CurrentServerRAM(), true);
+                        builder.WithColor(Color.Red);
+                        await message.Channel.SendMessageAsync("", false, builder.Build());
+                    }
+                    else
+                    {
+                        await message.Channel.SendMessageAsync("Server is not running!");
+                    }
+                    return;
                 }
-                else
+                if (response.StartsWith("!!"))
                 {
-                    await message.Channel.SendMessageAsync("Server is not running!");
+                    response = response.Remove(0, 2);//Removes the first char
+                    Console.WriteLine(response);
+                    await message.Channel.SendMessageAsync(SendCmd(response));
+                    return;
                 }
-                return;
             }
-            if (response.StartsWith("!!"))
+            else if (message.Channel.Id == ulong.Parse(Config.CurrentConfig.ChatChannel))
             {
-                response = response.Remove(0, 2);//Removes the first char
-                Console.WriteLine(response);
-                await message.Channel.SendMessageAsync(SendCmd(response));
-                return;
+                SendCmd("tellraw @a {\"text\":\"[Discord] " + (message.Author as SocketGuildUser).Username + ": " + message.Content + "\",\"color\":\"blue\"}");
             }
+            
 
         }
 
@@ -131,7 +157,19 @@ namespace MinecraftServerClient.DiscordBot
 
         private string SendCmd(string cmd)
         {
-                if (global.IsServerRunning && ServerUI.UsingRcon)
+
+            //Better way, keep the RCON connection open so with multiple commands we don't have to keep reopening the rcon and making new connection. Should also make commands 1/100th of a second faster lmao
+            if (ServerUI.RconON == false)
+            {
+                ServerUI.rconclient = new RCON("127.0.0.1", global.GetPort(global.PortTypes.Rcon));
+                ServerUI.rconclient.Authenticate(global.GetServerProperty("rcon.password"));
+                ServerUI.RconON = true;
+            }
+            if (ServerUI.rconclient.SendCommand(cmd, out Message resp)) { };
+            return resp.Body;
+            #region oldRecon
+            /*
+            if (global.IsServerRunning && ServerUI.UsingRcon)
                 {
                     // Create a new client and connect to the server.
                     RCON client = new RCON("127.0.0.1", global.GetPort(global.PortTypes.Rcon));
@@ -140,20 +178,21 @@ namespace MinecraftServerClient.DiscordBot
                     // Commands use the Try-Parse pattern for error handling instead of throwing Exceptions.
                     // Pass a Message by reference to get a bool return value indicating success or failure.
                     // The Sockets library can still raise Exceptions you'd want to catch (e.g. connection failures).
-                    if (!client.Authenticate(global.GetServerProperty("rcon.password"))) { /* handle authentication error */ };
+                    if (!client.Authenticate(global.GetServerProperty("rcon.password"))) { /* handle authentication error */// };
 
-                    Message resp;
-                    
-                    if (!client.SendCommand(cmd, out resp)) { };
-                    // Cleanly disconnect when finished.
-                    client.Close();
-                    return resp.Body;
-                }
-                else
-                {
-                    return "Please enable RCON in server properties or server may be offline";
-                }
-            
+            //     Message resp;
+
+            //  if (!client.SendCommand(cmd, out resp)) { };
+            // Cleanly disconnect when finished.
+            /*       client.Close();
+                   return resp.Body;
+               }
+               else
+               {
+                   return "Please enable RCON in server properties or server may be offline";
+               }
+           */
+            #endregion
         }
     }
 }

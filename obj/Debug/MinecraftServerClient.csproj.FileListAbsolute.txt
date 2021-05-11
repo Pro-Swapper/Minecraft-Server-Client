@@ -1,39 +1,45 @@
-C:\Users\ProMa\source\repos\MinecraftServerClient\bin\Debug\MinecraftServerClient.exe.config
-C:\Users\ProMa\source\repos\MinecraftServerClient\bin\Debug\MinecraftServerClient.exe
-C:\Users\ProMa\source\repos\MinecraftServerClient\obj\Debug\MinecraftServerClient.csprojAssemblyReference.cache
-C:\Users\ProMa\source\repos\MinecraftServerClient\obj\Debug\MinecraftServerClient.Properties.Resources.resources
-C:\Users\ProMa\source\repos\MinecraftServerClient\obj\Debug\MinecraftServerClient.csproj.GenerateResource.cache
-C:\Users\ProMa\source\repos\MinecraftServerClient\obj\Debug\MinecraftServerClient.csproj.CoreCompileInputs.cache
-C:\Users\ProMa\source\repos\MinecraftServerClient\obj\Debug\MinecraftServerClient.exe
-C:\Users\ProMa\source\repos\MinecraftServerClient\obj\Debug\MinecraftServerClient.InfoDialog.resources
-C:\Users\ProMa\source\repos\MinecraftServerClient\bin\Debug\Discord.Net.Core.dll
-C:\Users\ProMa\source\repos\MinecraftServerClient\bin\Debug\Microsoft.Bcl.AsyncInterfaces.dll
-C:\Users\ProMa\source\repos\MinecraftServerClient\bin\Debug\Newtonsoft.Json.dll
-C:\Users\ProMa\source\repos\MinecraftServerClient\bin\Debug\System.Collections.Immutable.dll
-C:\Users\ProMa\source\repos\MinecraftServerClient\bin\Debug\System.Interactive.Async.dll
-C:\Users\ProMa\source\repos\MinecraftServerClient\bin\Debug\System.Linq.Async.dll
-C:\Users\ProMa\source\repos\MinecraftServerClient\bin\Debug\System.Runtime.CompilerServices.Unsafe.dll
-C:\Users\ProMa\source\repos\MinecraftServerClient\bin\Debug\System.Threading.Tasks.Extensions.dll
-C:\Users\ProMa\source\repos\MinecraftServerClient\bin\Debug\Discord.Net.Core.xml
-C:\Users\ProMa\source\repos\MinecraftServerClient\bin\Debug\Microsoft.Bcl.AsyncInterfaces.xml
-C:\Users\ProMa\source\repos\MinecraftServerClient\bin\Debug\Newtonsoft.Json.xml
-C:\Users\ProMa\source\repos\MinecraftServerClient\bin\Debug\System.Collections.Immutable.xml
-C:\Users\ProMa\source\repos\MinecraftServerClient\bin\Debug\System.Interactive.Async.xml
-C:\Users\ProMa\source\repos\MinecraftServerClient\bin\Debug\System.Linq.Async.xml
-C:\Users\ProMa\source\repos\MinecraftServerClient\bin\Debug\System.Runtime.CompilerServices.Unsafe.xml
-C:\Users\ProMa\source\repos\MinecraftServerClient\bin\Debug\System.Threading.Tasks.Extensions.xml
-C:\Users\ProMa\source\repos\MinecraftServerClient\obj\Debug\MinecraftServerClient.ServerUI.resources
-C:\Users\ProMa\source\repos\MinecraftServerClient\obj\Debug\MinecraftServerClient.Dashboard.resources
-C:\Users\ProMa\source\repos\MinecraftServerClient\obj\Debug\MinecraftServerClient.csproj.CopyComplete
-C:\Users\ProMa\source\repos\MinecraftServerClient\bin\Debug\Discord.Net.Commands.dll
-C:\Users\ProMa\source\repos\MinecraftServerClient\bin\Debug\Discord.Net.Rest.dll
-C:\Users\ProMa\source\repos\MinecraftServerClient\bin\Debug\Discord.Net.WebSocket.dll
-C:\Users\ProMa\source\repos\MinecraftServerClient\bin\Debug\System.Buffers.dll
-C:\Users\ProMa\source\repos\MinecraftServerClient\bin\Debug\System.Memory.dll
-C:\Users\ProMa\source\repos\MinecraftServerClient\bin\Debug\System.Numerics.Vectors.dll
-C:\Users\ProMa\source\repos\MinecraftServerClient\bin\Debug\Discord.Net.Commands.xml
-C:\Users\ProMa\source\repos\MinecraftServerClient\bin\Debug\Discord.Net.Rest.xml
-C:\Users\ProMa\source\repos\MinecraftServerClient\bin\Debug\Discord.Net.WebSocket.xml
-C:\Users\ProMa\source\repos\MinecraftServerClient\bin\Debug\System.Buffers.xml
-C:\Users\ProMa\source\repos\MinecraftServerClient\bin\Debug\System.Memory.xml
-C:\Users\ProMa\source\repos\MinecraftServerClient\bin\Debug\System.Numerics.Vectors.xml
+C:\Users\ProMa\source\repos\MinecraftServerClient\Minecraft-Server-Client\Minecraft Server\MinecraftServerClient.exe.config
+C:\Users\ProMa\source\repos\MinecraftServerClient\Minecraft-Server-Client\Minecraft Server\MinecraftServerClient.exe
+C:\Users\ProMa\source\repos\MinecraftServerClient\Minecraft-Server-Client\Minecraft Server\Discord.Net.Commands.dll
+C:\Users\ProMa\source\repos\MinecraftServerClient\Minecraft-Server-Client\Minecraft Server\Discord.Net.Core.dll
+C:\Users\ProMa\source\repos\MinecraftServerClient\Minecraft-Server-Client\Minecraft Server\Discord.Net.Rest.dll
+C:\Users\ProMa\source\repos\MinecraftServerClient\Minecraft-Server-Client\Minecraft Server\Discord.Net.WebSocket.dll
+C:\Users\ProMa\source\repos\MinecraftServerClient\Minecraft-Server-Client\Minecraft Server\Microsoft.Bcl.AsyncInterfaces.dll
+C:\Users\ProMa\source\repos\MinecraftServerClient\Minecraft-Server-Client\Minecraft Server\Newtonsoft.Json.dll
+C:\Users\ProMa\source\repos\MinecraftServerClient\Minecraft-Server-Client\Minecraft Server\System.Buffers.dll
+C:\Users\ProMa\source\repos\MinecraftServerClient\Minecraft-Server-Client\Minecraft Server\System.Collections.Immutable.dll
+C:\Users\ProMa\source\repos\MinecraftServerClient\Minecraft-Server-Client\Minecraft Server\System.Diagnostics.DiagnosticSource.dll
+C:\Users\ProMa\source\repos\MinecraftServerClient\Minecraft-Server-Client\Minecraft Server\System.Interactive.Async.dll
+C:\Users\ProMa\source\repos\MinecraftServerClient\Minecraft-Server-Client\Minecraft Server\System.IO.Compression.ZipFile.dll
+C:\Users\ProMa\source\repos\MinecraftServerClient\Minecraft-Server-Client\Minecraft Server\System.IO.FileSystem.dll
+C:\Users\ProMa\source\repos\MinecraftServerClient\Minecraft-Server-Client\Minecraft Server\System.IO.FileSystem.Primitives.dll
+C:\Users\ProMa\source\repos\MinecraftServerClient\Minecraft-Server-Client\Minecraft Server\System.Linq.Async.dll
+C:\Users\ProMa\source\repos\MinecraftServerClient\Minecraft-Server-Client\Minecraft Server\System.Memory.dll
+C:\Users\ProMa\source\repos\MinecraftServerClient\Minecraft-Server-Client\Minecraft Server\System.Net.Sockets.dll
+C:\Users\ProMa\source\repos\MinecraftServerClient\Minecraft-Server-Client\Minecraft Server\System.Numerics.Vectors.dll
+C:\Users\ProMa\source\repos\MinecraftServerClient\Minecraft-Server-Client\Minecraft Server\System.Runtime.CompilerServices.Unsafe.dll
+C:\Users\ProMa\source\repos\MinecraftServerClient\Minecraft-Server-Client\Minecraft Server\System.Threading.Tasks.Extensions.dll
+C:\Users\ProMa\source\repos\MinecraftServerClient\Minecraft-Server-Client\Minecraft Server\Discord.Net.Commands.xml
+C:\Users\ProMa\source\repos\MinecraftServerClient\Minecraft-Server-Client\Minecraft Server\Discord.Net.Core.xml
+C:\Users\ProMa\source\repos\MinecraftServerClient\Minecraft-Server-Client\Minecraft Server\Discord.Net.Rest.xml
+C:\Users\ProMa\source\repos\MinecraftServerClient\Minecraft-Server-Client\Minecraft Server\Discord.Net.WebSocket.xml
+C:\Users\ProMa\source\repos\MinecraftServerClient\Minecraft-Server-Client\Minecraft Server\Microsoft.Bcl.AsyncInterfaces.xml
+C:\Users\ProMa\source\repos\MinecraftServerClient\Minecraft-Server-Client\Minecraft Server\Newtonsoft.Json.xml
+C:\Users\ProMa\source\repos\MinecraftServerClient\Minecraft-Server-Client\Minecraft Server\System.Buffers.xml
+C:\Users\ProMa\source\repos\MinecraftServerClient\Minecraft-Server-Client\Minecraft Server\System.Collections.Immutable.xml
+C:\Users\ProMa\source\repos\MinecraftServerClient\Minecraft-Server-Client\Minecraft Server\System.Diagnostics.DiagnosticSource.xml
+C:\Users\ProMa\source\repos\MinecraftServerClient\Minecraft-Server-Client\Minecraft Server\System.Interactive.Async.xml
+C:\Users\ProMa\source\repos\MinecraftServerClient\Minecraft-Server-Client\Minecraft Server\System.Linq.Async.xml
+C:\Users\ProMa\source\repos\MinecraftServerClient\Minecraft-Server-Client\Minecraft Server\System.Memory.xml
+C:\Users\ProMa\source\repos\MinecraftServerClient\Minecraft-Server-Client\Minecraft Server\System.Numerics.Vectors.xml
+C:\Users\ProMa\source\repos\MinecraftServerClient\Minecraft-Server-Client\Minecraft Server\System.Runtime.CompilerServices.Unsafe.xml
+C:\Users\ProMa\source\repos\MinecraftServerClient\Minecraft-Server-Client\Minecraft Server\System.Threading.Tasks.Extensions.xml
+C:\Users\ProMa\source\repos\MinecraftServerClient\Minecraft-Server-Client\obj\Debug\MinecraftServerClient.ServerUI.resources
+C:\Users\ProMa\source\repos\MinecraftServerClient\Minecraft-Server-Client\obj\Debug\MinecraftServerClient.InfoDialog.resources
+C:\Users\ProMa\source\repos\MinecraftServerClient\Minecraft-Server-Client\obj\Debug\MinecraftServerClient.Dashboard.resources
+C:\Users\ProMa\source\repos\MinecraftServerClient\Minecraft-Server-Client\obj\Debug\MinecraftServerClient.Properties.Resources.resources
+C:\Users\ProMa\source\repos\MinecraftServerClient\Minecraft-Server-Client\obj\Debug\MinecraftServerClient.csproj.GenerateResource.cache
+C:\Users\ProMa\source\repos\MinecraftServerClient\Minecraft-Server-Client\obj\Debug\MinecraftServerClient.csproj.CoreCompileInputs.cache
+C:\Users\ProMa\source\repos\MinecraftServerClient\Minecraft-Server-Client\obj\Debug\MinecraftServerClient.csproj.CopyComplete
+C:\Users\ProMa\source\repos\MinecraftServerClient\Minecraft-Server-Client\obj\Debug\MinecraftServerClient.exe
+C:\Users\ProMa\source\repos\MinecraftServerClient\Minecraft-Server-Client\obj\Debug\MinecraftServerClient.csprojAssemblyReference.cache

@@ -30,14 +30,15 @@ namespace MinecraftServerClient
         private void InitializeComponent()
         {
             this.button1 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.server = new System.ComponentModel.BackgroundWorker();
             this.rconbox = new System.Windows.Forms.TextBox();
             this.rconsend = new System.Windows.Forms.Button();
             this.button5 = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
+            this.startstopbutton = new System.Windows.Forms.Button();
+            this.LogChannelText = new System.Windows.Forms.Label();
+            this.chatlbl = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // button1
@@ -52,30 +53,6 @@ namespace MinecraftServerClient
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
-            // button2
-            // 
-            this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button2.ForeColor = System.Drawing.Color.White;
-            this.button2.Location = new System.Drawing.Point(22, 423);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(176, 34);
-            this.button2.TabIndex = 7;
-            this.button2.Text = "Start Server";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click_1);
-            // 
-            // button3
-            // 
-            this.button3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button3.ForeColor = System.Drawing.Color.White;
-            this.button3.Location = new System.Drawing.Point(386, 423);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(164, 34);
-            this.button3.TabIndex = 8;
-            this.button3.Text = "Stop Server";
-            this.button3.UseVisualStyleBackColor = true;
-            this.button3.Click += new System.EventHandler(this.button3_Click);
-            // 
             // textBox1
             // 
             this.textBox1.BorderStyle = System.Windows.Forms.BorderStyle.None;
@@ -89,6 +66,7 @@ namespace MinecraftServerClient
             // 
             // server
             // 
+            this.server.WorkerSupportsCancellation = true;
             this.server.DoWork += new System.ComponentModel.DoWorkEventHandler(this.server_DoWork);
             // 
             // rconbox
@@ -119,7 +97,7 @@ namespace MinecraftServerClient
             this.button5.ForeColor = System.Drawing.Color.White;
             this.button5.Location = new System.Drawing.Point(202, 471);
             this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(164, 34);
+            this.button5.Size = new System.Drawing.Size(176, 34);
             this.button5.TabIndex = 12;
             this.button5.Text = "Ping Server";
             this.button5.UseVisualStyleBackColor = true;
@@ -138,19 +116,56 @@ namespace MinecraftServerClient
             this.label1.Text = "Server IP:";
             this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
+            // startstopbutton
+            // 
+            this.startstopbutton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.startstopbutton.ForeColor = System.Drawing.Color.White;
+            this.startstopbutton.Location = new System.Drawing.Point(202, 389);
+            this.startstopbutton.Name = "startstopbutton";
+            this.startstopbutton.Size = new System.Drawing.Size(176, 34);
+            this.startstopbutton.TabIndex = 14;
+            this.startstopbutton.Text = "Start Server";
+            this.startstopbutton.UseVisualStyleBackColor = true;
+            this.startstopbutton.Click += new System.EventHandler(this.startstopbutton_Click);
+            // 
+            // LogChannelText
+            // 
+            this.LogChannelText.AutoSize = true;
+            this.LogChannelText.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.LogChannelText.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.LogChannelText.ForeColor = System.Drawing.Color.White;
+            this.LogChannelText.Location = new System.Drawing.Point(18, 444);
+            this.LogChannelText.Name = "LogChannelText";
+            this.LogChannelText.Size = new System.Drawing.Size(115, 15);
+            this.LogChannelText.TabIndex = 15;
+            this.LogChannelText.Text = "Log/RCON Channel:";
+            // 
+            // chatlbl
+            // 
+            this.chatlbl.AutoSize = true;
+            this.chatlbl.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.chatlbl.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.chatlbl.ForeColor = System.Drawing.Color.White;
+            this.chatlbl.Location = new System.Drawing.Point(19, 471);
+            this.chatlbl.Name = "chatlbl";
+            this.chatlbl.Size = new System.Drawing.Size(82, 15);
+            this.chatlbl.TabIndex = 16;
+            this.chatlbl.Text = "Chat Channel:";
+            // 
             // ServerUI
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(81)))), ((int)(((byte)(45)))), ((int)(((byte)(168)))));
             this.ClientSize = new System.Drawing.Size(600, 544);
+            this.Controls.Add(this.chatlbl);
+            this.Controls.Add(this.LogChannelText);
+            this.Controls.Add(this.startstopbutton);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.button5);
             this.Controls.Add(this.rconsend);
             this.Controls.Add(this.rconbox);
             this.Controls.Add(this.textBox1);
-            this.Controls.Add(this.button3);
-            this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
             this.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
@@ -158,7 +173,6 @@ namespace MinecraftServerClient
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Server Control Panel";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Run_FormClosing);
-            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.ServerUI_FormClosed);
             this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Form1_MouseDown);
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -167,14 +181,15 @@ namespace MinecraftServerClient
 
         #endregion
         private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Button button3;
         private System.Windows.Forms.TextBox textBox1;
         private System.ComponentModel.BackgroundWorker server;
         private System.Windows.Forms.TextBox rconbox;
         private System.Windows.Forms.Button rconsend;
         private System.Windows.Forms.Button button5;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Button startstopbutton;
+        private System.Windows.Forms.Label LogChannelText;
+        private System.Windows.Forms.Label chatlbl;
     }
 }
 

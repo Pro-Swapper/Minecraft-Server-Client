@@ -1,0 +1,27 @@
+[21:55:03] [Server thread/INFO]: Starting minecraft server version 1.8.9
+[21:55:03] [Server thread/INFO]: Loading properties
+[21:55:03] [Server thread/INFO]: Default game type: SURVIVAL
+[21:55:03] [Server thread/INFO]: Generating keypair
+[21:55:03] [Server thread/INFO]: Starting Minecraft server on *:25565
+[21:55:03] [Server thread/INFO]: Using default channel type
+[21:55:03] [Server thread/INFO]: Preparing level "Skyblock"
+[21:55:03] [Server thread/INFO]: Preparing start region for level 0
+[21:55:04] [Server thread/INFO]: Done (0.426s)! For help, type "help" or "?"
+[21:55:04] [Server thread/INFO]: Starting remote control listener
+[21:55:04] [RCON Listener #1/INFO]: RCON running on 0.0.0.0:25575
+[21:55:06] [User Authenticator #1/INFO]: UUID of player Episode19 is 463749f8-7109-4adf-b641-e9ccc3b57964
+[21:55:06] [Server thread/INFO]: Episode19[/192.168.1.103:49178] logged in with entity id 0 at (1.751169507946527, 67.0, -1.9171036772979022)
+[21:55:06] [Server thread/INFO]: Episode19 joined the game
+[21:55:08] [Server thread/INFO]: <Episode19> a
+[21:55:12] [RCON Listener #1/INFO]: Rcon connection from: /127.0.0.1
+[21:55:22] [RCON Client #2/INFO]: [Rcon: Stopping the server]
+[21:55:22] [Server thread/INFO]: Stopping server
+[21:55:22] [Server thread/INFO]: Saving players
+[21:55:22] [Server thread/INFO]: Episode19 lost connection: TextComponent{text='Disconnected', siblings=[], style=Style{hasParent=false, color=null, bold=null, italic=null, underlined=null, obfuscated=null, clickEvent=null, hoverEvent=null, insertion=null}}
+[21:55:22] [Server thread/INFO]: Episode19 left the game
+[21:55:22] [Server thread/INFO]: Saving worlds
+[21:55:22] [Server thread/INFO]: Saving chunks for level 'Skyblock'/Overworld
+[21:55:22] [Server thread/INFO]: Saving chunks for level 'Skyblock'/Nether
+[21:55:22] [Server thread/INFO]: Saving chunks for level 'Skyblock'/The End
+[21:55:22] [Server Shutdown Thread/INFO]: Stopping server
+[21:55:22] [Server Shutdown Thread/INFO]: Saving players
