@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using Discord.Net;
 using Discord.WebSocket;
 using System.Diagnostics;
-using System.Management;
+using System.IO;
 
 namespace MinecraftServerClient.DiscordBot
 {
@@ -15,13 +15,10 @@ namespace MinecraftServerClient.DiscordBot
     {
         public static void StartBot()
         {
-            if (Config.CurrentConfig.BotToken != "NONE" && Config.CurrentConfig.BotToken.Length > 10) new Bot().MainAsync().GetAwaiter().GetResult();
+            if (Config.CurrentConfig.UsingDiscord) new Bot().MainAsync().GetAwaiter().GetResult();
         }
 
         public static DiscordSocketClient _client = new DiscordSocketClient();
-
-
-
         public async Task MainAsync()
         {
             _client = new DiscordSocketClient();
@@ -29,34 +26,41 @@ namespace MinecraftServerClient.DiscordBot
             //_client.Log += Log;
             //_client.MessageUpdated += MessageUpdated;
             _client.MessageReceived += MessageReceived;
-            await _client.LoginAsync(TokenType.Bot, Config.CurrentConfig.BotToken);
+            _client.Ready += _client_Ready;
+            await _client.LoginAsync(TokenType.Bot, Config.CurrentConfig.BotToken); 
             await _client.StartAsync();
             await Task.Delay(-1);
+        }
+
+        private async Task _client_Ready()
+        {
+            string servermotd = global.GetServerProperty("motd");
+            ITextChannel chnl = (ITextChannel)_client.GetChannel(Config.CurrentConfig.LogChannel);
+            SocketGuild server = _client.GetGuild(chnl.GuildId);
+
+            IGuildUser user = server.GetUser(_client.CurrentUser.Id);
+            await user.ModifyAsync(x => { x.Nickname = servermotd; });
+
+            if (File.Exists("server-icon.png"))
+                await _client.CurrentUser.ModifyAsync(x => x.Avatar = new Discord.Image("server-icon.png"));
         }
 
         public static async Task SendMsgAsync(string msg)
         {
             try
             {
-                if (Config.CurrentConfig.LogChannel.ToString().Length > 1)
-                {
-                    ITextChannel chnl = _client.GetChannel(ulong.Parse(Config.CurrentConfig.LogChannel)) as ITextChannel; // 4
-                    await chnl.SendMessageAsync("`" + msg + "`"); // 5
-                }
+                    ITextChannel chnl = (ITextChannel)_client.GetChannel(Config.CurrentConfig.LogChannel);
+                    await chnl.SendMessageAsync("`" + msg + "`");
             }
             catch
             {
-
             }
         }
         public static async Task SendChat(string username, string msg)
         {
             try
             {
-                if (Config.CurrentConfig.ChatChannel.ToString().Length > 1)
-                {
-                    
-                    ITextChannel chnl = _client.GetChannel(ulong.Parse(Config.CurrentConfig.ChatChannel)) as ITextChannel;
+                    ITextChannel chnl = (ITextChannel)_client.GetChannel(Config.CurrentConfig.ChatChannel);
                     var builder = new EmbedBuilder();
                     builder.WithDescription(msg);
                     builder.WithColor(new Color(0xC5AB7));
@@ -67,7 +71,6 @@ namespace MinecraftServerClient.DiscordBot
                     builder.WithThumbnailUrl($"https://crafthead.net/avatar/{username}");
                     var embed = builder.Build();
                      await chnl.SendMessageAsync("", false, builder.Build());
-                }
             }
             catch
             {
@@ -85,7 +88,7 @@ namespace MinecraftServerClient.DiscordBot
             if (message.Author.IsBot)
                 return;
 
-            if (message.Channel.Id == ulong.Parse(Config.CurrentConfig.LogChannel))
+            if (message.Channel.Id == Config.CurrentConfig.LogChannel)
             {
                 string response = message.Content;
                 if (response == "!!status")
@@ -118,7 +121,7 @@ namespace MinecraftServerClient.DiscordBot
                     return;
                 }
             }
-            else if (message.Channel.Id == ulong.Parse(Config.CurrentConfig.ChatChannel))
+            else if (message.Channel.Id == Config.CurrentConfig.ChatChannel)
             {
                 SendCmd("tellraw @a {\"text\":\"[Discord] " + (message.Author as SocketGuildUser).Username + ": " + message.Content + "\",\"color\":\"blue\"}");
             }

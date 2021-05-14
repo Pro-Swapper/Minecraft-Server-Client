@@ -18,6 +18,7 @@ namespace MinecraftServerClient
     {
         public ServerUI(Form originalform, bool rcon)
         {
+            rcon = true;
             InitializeComponent();
             Region = Region.FromHrgn(global.CreateRoundRectRgn(0, 0, Width, Height, 20, 20));
             originf = originalform;
@@ -73,22 +74,19 @@ namespace MinecraftServerClient
                 if (DiscordBot.Bot._client.LoginState == Discord.LoginState.LoggedIn)
                 {
 
-                    if (e.Data.Contains("<") && e.Data.Contains(">"))
+                    //Sends as chat
+                    if (Config.CurrentConfig.ChatChannel != 0 && e.Data.Contains("<") && e.Data.Contains(">"))
                     {
                         //Chat
-                        Regex regex = new Regex("(?<=\\<)(.*?)(?=\\>)");
-
-                        Match match = regex.Match(e.Data);
+                        Match match = new Regex("(?<=\\<)(.*?)(?=\\>)").Match(e.Data);//Matches regex
                         if (match.Success)
                         {
                             var result = e.Data.Substring(e.Data.LastIndexOf('>') + 1);
                             DiscordBot.Bot.SendChat(match.Value, result);
                         }
-                    }
-                    else
-                    {
-                        DiscordBot.Bot.SendMsgAsync(e.Data);
-                    }
+                    }//Sends as log
+                    else if(Config.CurrentConfig.LogChannel != 0)//If the log channel isn't 0 aka the user wants logs
+                            DiscordBot.Bot.SendMsgAsync(e.Data);
                     
                     
                 }
@@ -215,6 +213,8 @@ namespace MinecraftServerClient
 
         private void startstopbutton_Click(object sender, EventArgs e)
         {
+            bool UsingDiscord = Config.CurrentConfig.UsingDiscord;
+
             bool IsServerRunning = global.IsServerRunning;
 
             Button thisbutton = ((Button)sender);
@@ -231,8 +231,12 @@ namespace MinecraftServerClient
                     if (_botthread.IsAlive)
                         _botthread.Abort();
 
-                    _botthread = new Thread(DiscordBot.Bot.StartBot);
-                    _botthread.Start();
+                    if (UsingDiscord)//Checks to see if the user has selected Discord integration
+                    {
+                        _botthread = new Thread(DiscordBot.Bot.StartBot);
+                        _botthread.Start();
+                    }
+                    
                     textBox1.Clear();
 
 
@@ -241,19 +245,23 @@ namespace MinecraftServerClient
 
                     server.RunWorkerAsync();
 
-                    redo:  try
+                    if (UsingDiscord)
                     {
-                        Discord.WebSocket.DiscordSocketClient client = DiscordBot.Bot._client;
+                    redo: try
+                        {
+                            Discord.WebSocket.DiscordSocketClient client = DiscordBot.Bot._client;
 
-                        //ik these vars to get channels names are long but it works
-                        LogChannelText.Text = $"Log/RCON Channel: {((Discord.ITextChannel)client.GetChannel(ulong.Parse(Config.CurrentConfig.LogChannel))).Name}";
-                        chatlbl.Text = $"Chat Channel: {((Discord.ITextChannel)client.GetChannel(ulong.Parse(Config.CurrentConfig.ChatChannel))).Name}";
+                            //ik these vars to get channels names are long but it works
+                            LogChannelText.Text = $"Log/RCON Channel: {((Discord.ITextChannel)client.GetChannel(Config.CurrentConfig.LogChannel)).Name}";
+                            chatlbl.Text = $"Chat Channel: {((Discord.ITextChannel)client.GetChannel(Config.CurrentConfig.ChatChannel)).Name}";
+                        }
+                        catch
+                        {
+                            Thread.Sleep(10);
+                            goto redo;
+                        }
                     }
-                    catch
-                    {
-                        Thread.Sleep(10);
-                        goto redo;
-                    }
+                    
 
                     break;
                 case true:
@@ -261,9 +269,12 @@ namespace MinecraftServerClient
                     if (server.IsBusy)
                         server.CancelAsync();
                         SendCmd("stop");//Save world and stuff
-                    if (DiscordBot.Bot._client.LoginState == Discord.LoginState.LoggedIn)
-                        DiscordBot.Bot._client.StopAsync();
 
+                    if (UsingDiscord)
+                    {
+                        if (DiscordBot.Bot._client.LoginState == Discord.LoginState.LoggedIn)
+                            DiscordBot.Bot._client.StopAsync();
+                    }
                     if (_botthread.IsAlive)
                         _botthread.Abort();
 

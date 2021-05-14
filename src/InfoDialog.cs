@@ -12,9 +12,10 @@ namespace MinecraftServerClient
 {
     public partial class InfoDialog : Form
     {
-        public InfoDialog(string selecteditem)
+        public InfoDialog(string selecteditem, Form dashboard)
         {
             InitializeComponent();
+            DashboardF = dashboard;
             Region = Region.FromHrgn(global.CreateRoundRectRgn(0, 0, Width, Height, 20, 20));
             string[] data = selecteditem.Split('=');
             configproperty = data[0];
@@ -43,6 +44,7 @@ namespace MinecraftServerClient
             
             label1.Text = $"{configproperty} ({config})";
         }
+        private Form DashboardF { get; set; }
         private ConfigType config { get; set; }
         private string configproperty { get; set; }
 
@@ -62,11 +64,7 @@ namespace MinecraftServerClient
             }
         }
 
-        private void button1_Click(object sender, EventArgs e)
-        {
-            Close();
-        }
-
+        private void button1_Click(object sender, EventArgs e)=> Close();
         private void button2_Click(object sender, EventArgs e)
         {
             if (config == ConfigType.Bool)
@@ -77,15 +75,30 @@ namespace MinecraftServerClient
             {
                 global.UpdateServerPropery(configproperty, StringBox.Text);
             }
+
+            //Updates server properties ListBox in Dashboard
+            foreach (Control c in DashboardF.Controls)
+                if (c.Tag == "ServerProperties")
+                {
+                    ListBox serverproperties = ((ListBox)c);
+                    serverproperties.Items.Clear();
+                    string[] settings = File.ReadAllLines(global.PropertiesPath);
+                    Array.Sort(settings);
+                    foreach (string setting in settings)
+                    {
+                        if (setting.Contains("="))
+                        {
+                            serverproperties.Items.Add(setting);
+                        }
+                    }
+                }
             Close();
         }
 
         private void KeyPress(object sender, KeyPressEventArgs e)
         {
             if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && e.KeyChar != '.')
-            {
                 e.Handled = true;
-            }
         }
     }
 }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Drawing.Imaging;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -17,13 +18,15 @@ namespace MinecraftServerClient
         {
             InitializeComponent();
             Region = Region.FromHrgn(global.CreateRoundRectRgn(0, 0, Width, Height, 20, 20));
-            if (Config.CurrentConfig.BotToken != "NONE")
+
+            
+            if (File.Exists("server-icon.png"))
             {
-                discordcheckbox.Checked = true;
-                bottoken.Text = Config.CurrentConfig.BotToken;
-                logchannel.Text = Config.CurrentConfig.LogChannel;
-                chatchannel.Text = Config.CurrentConfig.ChatChannel;
+                //Image.FromFile("server-icon.png"); // Image fromfile locks the image to process so file stream does it nicely  //https://social.msdn.microsoft.com/Forums/vstudio/en-US/d08397c3-94b9-4f47-8095-c701a8dd63b1/how-can-i-work-around-the-fact-tha-imagefromfile-locks-the-file?forum=csharpgeneral
+                using (FileStream stream = new FileStream("server-icon.png", FileMode.Open, FileAccess.Read))
+                    pictureBox1.Image = Image.FromStream(stream);
             }
+                
         }
         private void Form1_MouseDown(object sender, MouseEventArgs e)
         {
@@ -46,86 +49,67 @@ namespace MinecraftServerClient
 
         private void serverproperties_SelectedIndexChanged(object sender, EventArgs e)
         {
-            new InfoDialog(serverproperties.SelectedItem.ToString()).ShowDialog();
+            new InfoDialog(serverproperties.SelectedItem.ToString(), this).ShowDialog();
         }
-        void UpdateSettingsBox()
+        public void UpdateSettingsBox()
         {
-            serverproperties.Items.Clear();
-            string[] settings = File.ReadAllLines(global.PropertiesPath);
-            Array.Sort(settings);
-            foreach (string setting in settings)
+            if (File.Exists(global.PropertiesPath))
             {
-                if (setting.Contains("="))
+                serverproperties.Items.Clear();
+                string[] settings = File.ReadAllLines(global.PropertiesPath);
+                Array.Sort(settings);
+                foreach (string setting in settings)
                 {
-                    serverproperties.Items.Add(setting);
+                    if (setting.Contains("="))
+                    {
+                        serverproperties.Items.Add(setting);
+                    }
                 }
             }
+            
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
+            if (global.GetServerProperty("enable-rcon") != "true")
+            {
+                MessageBox.Show("Enabled-rcon MUST be set to true");
+                return;
+            }
+
             if (global.GetServerProperty("rcon.password").Length < 1)
                 global.UpdateServerPropery("rcon.password", global.RandomString(10));
 
 
             new ServerUI(this, bool.Parse(global.GetServerProperty("enable-rcon"))).ShowDialog();
         }
-        private void Form1_MouseEnter(object sender, EventArgs e)
-        {
-            UpdateSettingsBox();
-        }
         private void launchargs_TextChanged(object sender, EventArgs e)
         {
             Config.CurrentConfig.launchargs = launchargs.Text;
             Config.SaveConfig();
         }
-
-        private void discordcheckbox_CheckedChanged(object sender, EventArgs e)
+        private void pictureBox1_Click(object sender, EventArgs e)
         {
-            if (discordcheckbox.Checked)
+            using (OpenFileDialog a = new OpenFileDialog())
             {
-                BotTokenlabel.Visible = true;
-                bottoken.Visible = true;
-                loglabel.Visible = true;
-                logchannel.Visible = true;
+                a.Title = "Select the server icon";
 
-                chatchannel.Visible = true;
-                chatchannellabel.Visible = true;
+                if (a.ShowDialog() == DialogResult.OK)
+                {
+                    if (File.Exists("server-icon.png"))
+                        File.Delete("server-icon.png");
+                    Bitmap servericon = global.ResizeImage(Image.FromFile(a.FileName), 64,64);
+                    
+                    servericon.Save("server-icon.png", ImageFormat.Png);
+
+                    pictureBox1.Image = servericon;
+                }
             }
-            else
-            {
-                Config.CurrentConfig.BotToken = "NONE";
-                Config.SaveConfig();
-                BotTokenlabel.Visible = false;
-                bottoken.Text = "";
-                bottoken.Visible = false;
-
-                loglabel.Visible = false;
-                logchannel.Visible = false;
-                logchannel.Text = "";
-
-                chatchannel.Visible = false;
-                chatchannellabel.Visible = false;
-                chatchannel.Text = "";
-            }   
         }
 
-        private void bottoken_TextChanged(object sender, EventArgs e)
+        private void button3_Click(object sender, EventArgs e)
         {
-            Config.CurrentConfig.BotToken = bottoken.Text;
-            Config.SaveConfig();
-        }
-
-        private void logchannel_TextChanged(object sender, EventArgs e)
-        {
-            Config.CurrentConfig.LogChannel = logchannel.Text;
-            Config.SaveConfig();
-        }
-
-        private void chatchannel_TextChanged(object sender, EventArgs e)
-        {
-            Config.CurrentConfig.ChatChannel = chatchannel.Text;
-            Config.SaveConfig();
+            new DiscordUI(this).ShowDialog(); 
         }
     }
 }

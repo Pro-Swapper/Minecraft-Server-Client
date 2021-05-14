@@ -35,15 +35,10 @@ namespace MinecraftServerClient
             this.button2 = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
             this.launchargs = new System.Windows.Forms.TextBox();
-            this.discordcheckbox = new System.Windows.Forms.CheckBox();
-            this.bottoken = new System.Windows.Forms.TextBox();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.loglabel = new System.Windows.Forms.Label();
-            this.logchannel = new System.Windows.Forms.TextBox();
-            this.BotTokenlabel = new System.Windows.Forms.Label();
-            this.chatchannellabel = new System.Windows.Forms.Label();
-            this.chatchannel = new System.Windows.Forms.TextBox();
-            this.groupBox1.SuspendLayout();
+            this.label3 = new System.Windows.Forms.Label();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.button3 = new System.Windows.Forms.Button();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // serverproperties
@@ -52,8 +47,9 @@ namespace MinecraftServerClient
             this.serverproperties.FormattingEnabled = true;
             this.serverproperties.Location = new System.Drawing.Point(54, 62);
             this.serverproperties.Name = "serverproperties";
-            this.serverproperties.Size = new System.Drawing.Size(214, 221);
+            this.serverproperties.Size = new System.Drawing.Size(214, 286);
             this.serverproperties.TabIndex = 0;
+            this.serverproperties.Tag = "ServerProperties";
             this.serverproperties.SelectedIndexChanged += new System.EventHandler(this.serverproperties_SelectedIndexChanged);
             // 
             // label1
@@ -107,105 +103,42 @@ namespace MinecraftServerClient
             this.launchargs.Location = new System.Drawing.Point(394, 62);
             this.launchargs.Multiline = true;
             this.launchargs.Name = "launchargs";
-            this.launchargs.Size = new System.Drawing.Size(234, 127);
+            this.launchargs.Size = new System.Drawing.Size(234, 87);
             this.launchargs.TabIndex = 10;
             this.launchargs.TextChanged += new System.EventHandler(this.launchargs_TextChanged);
             // 
-            // discordcheckbox
+            // label3
             // 
-            this.discordcheckbox.AutoSize = true;
-            this.discordcheckbox.ForeColor = System.Drawing.Color.White;
-            this.discordcheckbox.Location = new System.Drawing.Point(6, 21);
-            this.discordcheckbox.Name = "discordcheckbox";
-            this.discordcheckbox.Size = new System.Drawing.Size(195, 17);
-            this.discordcheckbox.TabIndex = 11;
-            this.discordcheckbox.Text = "Integrate Server with Discord Bot";
-            this.discordcheckbox.UseVisualStyleBackColor = true;
-            this.discordcheckbox.CheckedChanged += new System.EventHandler(this.discordcheckbox_CheckedChanged);
+            this.label3.AutoSize = true;
+            this.label3.ForeColor = System.Drawing.Color.White;
+            this.label3.Location = new System.Drawing.Point(391, 169);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(66, 13);
+            this.label3.TabIndex = 14;
+            this.label3.Text = "Server Icon:";
             // 
-            // bottoken
+            // pictureBox1
             // 
-            this.bottoken.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.bottoken.Font = new System.Drawing.Font("Consolas", 9F);
-            this.bottoken.Location = new System.Drawing.Point(98, 44);
-            this.bottoken.Multiline = true;
-            this.bottoken.Name = "bottoken";
-            this.bottoken.Size = new System.Drawing.Size(239, 60);
-            this.bottoken.TabIndex = 12;
-            this.bottoken.Visible = false;
-            this.bottoken.TextChanged += new System.EventHandler(this.bottoken_TextChanged);
+            this.pictureBox1.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.pictureBox1.Location = new System.Drawing.Point(398, 194);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(64, 64);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox1.TabIndex = 15;
+            this.pictureBox1.TabStop = false;
+            this.pictureBox1.Click += new System.EventHandler(this.pictureBox1_Click);
             // 
-            // groupBox1
+            // button3
             // 
-            this.groupBox1.Controls.Add(this.chatchannellabel);
-            this.groupBox1.Controls.Add(this.chatchannel);
-            this.groupBox1.Controls.Add(this.loglabel);
-            this.groupBox1.Controls.Add(this.logchannel);
-            this.groupBox1.Controls.Add(this.BotTokenlabel);
-            this.groupBox1.Controls.Add(this.discordcheckbox);
-            this.groupBox1.Controls.Add(this.bottoken);
-            this.groupBox1.ForeColor = System.Drawing.Color.White;
-            this.groupBox1.Location = new System.Drawing.Point(401, 282);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(387, 168);
-            this.groupBox1.TabIndex = 13;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Discord Bot Integration";
-            // 
-            // loglabel
-            // 
-            this.loglabel.AutoSize = true;
-            this.loglabel.ForeColor = System.Drawing.Color.White;
-            this.loglabel.Location = new System.Drawing.Point(3, 110);
-            this.loglabel.Name = "loglabel";
-            this.loglabel.Size = new System.Drawing.Size(89, 13);
-            this.loglabel.TabIndex = 16;
-            this.loglabel.Text = "Log Channel ID:";
-            this.loglabel.Visible = false;
-            // 
-            // logchannel
-            // 
-            this.logchannel.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.logchannel.Font = new System.Drawing.Font("Consolas", 9F);
-            this.logchannel.Location = new System.Drawing.Point(98, 110);
-            this.logchannel.Name = "logchannel";
-            this.logchannel.Size = new System.Drawing.Size(239, 15);
-            this.logchannel.TabIndex = 15;
-            this.logchannel.Visible = false;
-            this.logchannel.TextChanged += new System.EventHandler(this.logchannel_TextChanged);
-            // 
-            // BotTokenlabel
-            // 
-            this.BotTokenlabel.AutoSize = true;
-            this.BotTokenlabel.ForeColor = System.Drawing.Color.White;
-            this.BotTokenlabel.Location = new System.Drawing.Point(4, 47);
-            this.BotTokenlabel.Name = "BotTokenlabel";
-            this.BotTokenlabel.Size = new System.Drawing.Size(61, 13);
-            this.BotTokenlabel.TabIndex = 14;
-            this.BotTokenlabel.Text = "Bot Token:";
-            this.BotTokenlabel.Visible = false;
-            // 
-            // chatchannellabel
-            // 
-            this.chatchannellabel.AutoSize = true;
-            this.chatchannellabel.ForeColor = System.Drawing.Color.White;
-            this.chatchannellabel.Location = new System.Drawing.Point(3, 131);
-            this.chatchannellabel.Name = "chatchannellabel";
-            this.chatchannellabel.Size = new System.Drawing.Size(94, 13);
-            this.chatchannellabel.TabIndex = 18;
-            this.chatchannellabel.Text = "Chat Channel ID:";
-            this.chatchannellabel.Visible = false;
-            // 
-            // chatchannel
-            // 
-            this.chatchannel.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.chatchannel.Font = new System.Drawing.Font("Consolas", 9F);
-            this.chatchannel.Location = new System.Drawing.Point(98, 131);
-            this.chatchannel.Name = "chatchannel";
-            this.chatchannel.Size = new System.Drawing.Size(239, 15);
-            this.chatchannel.TabIndex = 17;
-            this.chatchannel.Visible = false;
-            this.chatchannel.TextChanged += new System.EventHandler(this.chatchannel_TextChanged);
+            this.button3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button3.ForeColor = System.Drawing.Color.White;
+            this.button3.Location = new System.Drawing.Point(398, 352);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(284, 34);
+            this.button3.TabIndex = 16;
+            this.button3.Text = "Discord Bot Integration";
+            this.button3.UseVisualStyleBackColor = true;
+            this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
             // Dashboard
             // 
@@ -213,7 +146,9 @@ namespace MinecraftServerClient
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(81)))), ((int)(((byte)(45)))), ((int)(((byte)(168)))));
             this.ClientSize = new System.Drawing.Size(800, 462);
-            this.Controls.Add(this.groupBox1);
+            this.Controls.Add(this.button3);
+            this.Controls.Add(this.pictureBox1);
+            this.Controls.Add(this.label3);
             this.Controls.Add(this.launchargs);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.button2);
@@ -227,9 +162,7 @@ namespace MinecraftServerClient
             this.Text = "Minecraft Server Client";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Form1_MouseDown);
-            this.MouseEnter += new System.EventHandler(this.Form1_MouseEnter);
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -243,14 +176,9 @@ namespace MinecraftServerClient
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox launchargs;
-        private System.Windows.Forms.CheckBox discordcheckbox;
-        private System.Windows.Forms.TextBox bottoken;
-        private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.Label BotTokenlabel;
-        private System.Windows.Forms.Label loglabel;
-        private System.Windows.Forms.TextBox logchannel;
-        private System.Windows.Forms.Label chatchannellabel;
-        private System.Windows.Forms.TextBox chatchannel;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.Button button3;
     }
 }
 

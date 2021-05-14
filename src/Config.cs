@@ -4,15 +4,13 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Web.Script.Serialization;
+using Newtonsoft.Json;
 namespace MinecraftServerClient
 {
     class Config
     {
         private const string ConfigPath = "config.json";
-        private static JavaScriptSerializer js = new JavaScriptSerializer();
-
-
+        
         public static ConfigObj CurrentConfig;
 
         public static void InitConfig()
@@ -28,21 +26,22 @@ namespace MinecraftServerClient
             File.WriteAllText(ConfigPath, ToJson(CurrentConfig));
         }
 
-        public static T FromJSON<T>(string json)
+        public static T FromJSON<T>(string json)//Make a json string to obj
         {
-            return js.Deserialize<T>(json);
+            return JsonConvert.DeserializeObject<T>(json);
         }
-        public static string ToJson(Object config)
+        public static string ToJson(Object config)//Make obj to json string
         {
-            return js.Serialize(config);
+            return JsonConvert.SerializeObject(config);
         }
 
         public class ConfigObj
         {
             public string launchargs { get; set; } = "-Xmx1024M -Xms1024M -jar server.jar --nogui";
-            public string BotToken { get; set; } = "NONE";
-            public string LogChannel { get; set; }
-            public string ChatChannel { get; set; }
+            public string BotToken { get; set; } = "";
+            public bool UsingDiscord { get; set; } = false;
+            public ulong LogChannel { get; set; } = 0;
+            public ulong ChatChannel { get; set; } = 0;
         }
 
     }
